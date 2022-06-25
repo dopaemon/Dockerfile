@@ -7,8 +7,8 @@ docker_builder:
      DOCKERTAG: "latest"
      GITHUB: "https://github.com/dopaemon/Dockerfile.git"
    Docker_script: |
-     git clone -b $DOCKERNAME --single-branch $GITHUB Dockerfile && cd Dockerfile
-     if [ "$CIRRUS_REPO_OWNER" == "dopaemon" && "$CIRRUS_BRANCH" == "bionic" ]; then
+     if [ "$CIRRUS_BRANCH" == "bionic" ]; then
+      git clone -b $DOCKERNAME --single-branch $GITHUB Dockerfile && cd Dockerfile
       docker login -u $USERNAME -p $PASSWORD
       docker build -t $DOCKERNAME . 
       docker tag $DOCKERNAME:$DOCKERTAG $USERNAME/$DOCKERNAME:$DOCKERTAG
