@@ -25,8 +25,6 @@ task:
     - sudo apt-get update
     - sudo apt-get install -y ca-certificates curl gnupg lsb-release
     - sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-    - sudo systemctl enable docker
-    - sudo systemctl start docker
     - sudo service docker start
     - sudo usermod -aG docker $USER
     - git clone -b $DOCKERNAME --single-branch $GITHUB Dockerfile && cd Dockerfile
