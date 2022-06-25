@@ -27,7 +27,7 @@ task:
     - sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
     - sudo service docker start
     - sudo usermod -aG docker $(whoami)
-    - sudo chmod 666 /var/run/docker.soc
+    - sudo chmod 666 /var/run/docker.sock
     - sudo setfacl --modify user::rw /var/run/docker.sock
     - sudo newgroup docker
     - docker permission for linux ec2
