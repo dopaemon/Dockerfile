@@ -11,13 +11,11 @@ env:
     GITHUB: "https://github.com/dopaemon/Dockerfile.git"
 
 task:
-  name: Compile X-UI
+  name: Docker Builder
   only_if: $CIRRUS_REPO_OWNER == 'dopaemon' && $CIRRUS_BRANCH == 'bionic'
   skip: $CIRRUS_BRANCH != 'bionic'
   container:
     image: docker:git
-    cpu: 4
-    memory: 8G
   Docker_script:
     - git clone -b $DOCKERNAME --single-branch $GITHUB Dockerfile && cd Dockerfile
     - docker login -u $USERNAME -p $PASSWORD
