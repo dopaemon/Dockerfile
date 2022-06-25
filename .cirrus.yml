@@ -15,7 +15,7 @@ task:
   only_if: $CIRRUS_REPO_OWNER == 'dopaemon' && $CIRRUS_BRANCH == 'bionic'
   skip: $CIRRUS_BRANCH != 'bionic'
   container:
-    image: gcr.io/cloud-builders/git
+    image: docker
     cpu: 4
     memory: 8G
   Docker_script:
