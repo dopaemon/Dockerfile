@@ -63,6 +63,19 @@ RUN mkdir -p ~/go/{bin,pkg,src}
 RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
 RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
 
+# My Script
+RUN wget -O compile-xray-core https://raw.githubusercontent.com/dopaemon/Dockerfile/bionic/compile-xray-core
+RUN wget -O compile-xrayr https://raw.githubusercontent.com/dopaemon/Dockerfile/bionic/compile-xrayr
+RUN wget -O compile-xui https://raw.githubusercontent.com/dopaemon/Dockerfile/bionic/compile-xui
+
+RUN chmod +x compile-xray-core
+RUN chmod +x compile-xrayr
+RUN chmod +x compile-xui
+
+RUN cp -r compile-xray-core /usr/bin/
+RUN cp -r compile-xrayr /usr/bin/
+RUN cp -r compile-xui /usr/bin/
+
 # Add User
 # Why? Well for avoid something wrong
 # I've seen some notes for not using root when build

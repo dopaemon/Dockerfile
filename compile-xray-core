@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+package=Xray-Core
+package_split=(${package//\// })
+package_name=${package_split[-1]}
+
+platforms=(
+"linux/386"
+"linux/amd64"
+"linux/arm"
+"linux/arm64"
+"linux/mips"
+"linux/mips64"
+"linux/mips64le"
+"linux/mipsle"
+"linux/riscv64"
+"linux/s390x"
+)
+
+for platform in "${platforms[@]}"
+do
+    platform_split=(${platform//\// })
+    GOOS=${platform_split[0]}
+    GOARCH=${platform_split[1]}
+    output_name=$package_name'-'$GOOS'-'$GOARCH
+    if [ $GOOS = "windows" ]; then
+        output_name+='.exe'
+    fi
+    echo " "
+    echo "###################### $GOARCH ######################"
+    echo " "
+    env GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -v -trimpath -ldflags "-s -w -buildid=" ./main
+    if [ $? -ne 0 ]; then
+           echo 'An error has occurred! Aborting the script execution...'
+        exit 1
+    fi
+done
