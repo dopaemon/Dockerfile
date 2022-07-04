@@ -25,10 +25,28 @@ do
     if [ $GOOS = "windows" ]; then
         output_name+='.exe'
     fi
-    echo " "
-    echo "###################### $GOARCH ######################"
-    echo " "
-    env GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
+
+    if [ $GOARCH = "arm" ]; then
+        echo " "
+        echo "###################### arm32v5 ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"-v5 -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
+        echo " "
+        echo "###################### arm32v6 ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"-v6 -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
+        echo " "
+        echo "###################### arm32v7 ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"-v7 -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
+    else
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
+    fi
+
+
     if [ $? -ne 0 ]; then
            echo 'An error has occurred! Aborting the script execution...'
         exit 1
