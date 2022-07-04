@@ -21,7 +21,7 @@ RUN apt-get install software-properties-common apt-utils bison repo libssl-dev b
 RUN /usr/bin/apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv C99B11DEB97541F0
 RUN apt-add-repository https://cli.github.com/packages
 RUN apt-get update
-RUN apt-get install gh
+RUN apt-get install gh -yq
 
 ## X-UI Packages
 RUN apt-get install jq wget unzip rclone aria2 git gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu -y -q
