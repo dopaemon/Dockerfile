@@ -25,10 +25,27 @@ do
     if [ $GOOS = "windows" ]; then
         output_name+='.exe'
     fi
-    echo " "
-    echo "###################### $GOARCH ######################"
-    echo " "
-    env GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -v -trimpath -ldflags "-s -w -buildid=" ./main
+
+    if [ $GOARCH = "arm" ]; then
+        echo " "
+        echo "###################### arm32v5 ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"32v5 -v -v -trimpath -ldflags "-s -w -buildid=" ./main
+        echo " "
+        echo "###################### arm32v6 ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"32v6 -v -v -trimpath -ldflags "-s -w -buildid=" ./main
+        echo " "
+        echo "###################### arm32v7 ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"32v7 -v -v -trimpath -ldflags "-s -w -buildid=" ./main
+    else
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -v -trimpath -ldflags "-s -w -buildid=" ./main
+    fi
+
     if [ $? -ne 0 ]; then
            echo 'An error has occurred! Aborting the script execution...'
         exit 1
