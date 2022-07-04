@@ -16,6 +16,7 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # Install dependencies
 RUN apt-get update
+RUN apt-get full-upgrade -y
 RUN apt-get -y install --no-install-recommends apt-utils dialog 2>&1
 RUN apt-get install software-properties-common bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates -y
 
