@@ -15,10 +15,16 @@ ENV USE_CCACHE true
 
 # Install dependencies
 RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install apt-utils bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates -y
+RUN apt-get install software-properties-common apt-utils bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates -y
+
+# Install Gh
+RUN /usr/bin/apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv C99B11DEB97541F0
+RUN apt-add-repository https://cli.github.com/packages
+RUN apt-get update
+RUN apt-get install gh
 
 ## X-UI Packages
-RUN apt-get install software-properties-common jq wget unzip rclone aria2 git gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu -y -q
+RUN apt-get install jq wget unzip rclone aria2 git gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu -y -q
 
 RUN apt-get purge openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre -y
 
