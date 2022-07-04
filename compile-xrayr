@@ -30,20 +30,20 @@ do
         echo " "
         echo "###################### arm32v5 ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"32v5 -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=0 GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"32v5 -a -installsuffix cgo -v -trimpath -ldflags "-s -w -buildid=" ./main
         echo " "
         echo "###################### arm32v6 ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"32v6 -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=0 GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"32v6 -a -installsuffix cgo -v -trimpath -ldflags "-s -w -buildid=" ./main
         echo " "
         echo "###################### arm32v7 ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"32v7 -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=0 GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"32v7 -a -installsuffix cgo -v -trimpath -ldflags "-s -w -buildid=" ./main
     else
         echo " "
         echo "###################### $GOARCH ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=0 GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -a -installsuffix cgo -v -trimpath -ldflags "-s -w -buildid=" ./main
     fi
 
     if [ $? -ne 0 ]; then
