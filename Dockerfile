@@ -51,6 +51,9 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 RUN add-apt-repository ppa:longsleep/golang-backports
 RUN apt-get update
 RUN apt-get install golang-go -yq
+RUN mkdir -p ~/go/{bin,pkg,src}
+RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
+RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
 
 # Add User
 # Why? Well for avoid something wrong
@@ -64,6 +67,11 @@ WORKDIR /home/doraemon
 RUN git config --global user.email "polarisdp@gmail.com"
 RUN git config --global user.name "dopaemon"
 RUN git config --global color.ui false
+
+# GoLang ENV
+RUN mkdir -p ~/go/{bin,pkg,src}
+RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
+RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
 
 # Work in the build directory, repo is expected to be init'd here
 WORKDIR /src
