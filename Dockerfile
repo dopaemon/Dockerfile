@@ -26,6 +26,9 @@ RUN apt-add-repository https://cli.github.com/packages
 RUN apt-get update
 RUN apt-get install gh -yq
 
+## GCC
+RUN apt-get install -yq libgcc1-i386-cross gcc-7-mipsel-linux-gnu
+
 ## X-UI Packages
 RUN apt-get install jq wget unzip rclone aria2 git gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu -y -q
 
@@ -72,6 +75,10 @@ RUN wget -O compile-xui https://raw.githubusercontent.com/dopaemon/Dockerfile/bi
 RUN chmod +x compile-xray-core
 RUN chmod +x compile-xrayr
 RUN chmod +x compile-xui
+
+RUN rm -rf /usr/bin/compile-xray-core
+RUN rm -rf /usr/bin/compile-xrayr
+RUN rm -rf /usr/bin/compile-xui
 
 RUN cp -r compile-xray-core /usr/bin/
 RUN cp -r compile-xrayr /usr/bin/
