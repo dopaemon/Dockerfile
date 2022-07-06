@@ -63,7 +63,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 # Install GoLang
 RUN add-apt-repository ppa:longsleep/golang-backports
 RUN apt-get update
-RUN wget https://storage.googleapis.com/golang/$VERSION.linux-amd64.tar.gz
+RUN wget https://storage.googleapis.com/golang/$GOVER.linux-amd64.tar.gz
 RUN tar -xf go*linux-amd64.tar.gz
 RUN chown -R root:root go
 RUN mv -v go /usr/local
