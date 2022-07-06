@@ -30,15 +30,15 @@ do
         echo " "
         echo "###################### arm32v5 ######################"
         echo " "
-        env CGO_ENABLED=1 CC=arm-linux-gnueabihf-gcc GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"32v5 -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=1 CC=arm-linux-gnueabi-gcc GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"32v5 -v -trimpath -ldflags "-s -w -buildid=" ./main
         echo " "
         echo "###################### arm32v6 ######################"
         echo " "
-        env CGO_ENABLED=1 CC=arm-linux-gnueabihf-gcc GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"32v6 -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=1 CC=arm-linux-gnueabi-gcc GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"32v6 -v -trimpath -ldflags "-s -w -buildid=" ./main
         echo " "
         echo "###################### arm32v7 ######################"
         echo " "
-        env CGO_ENABLED=1 CC=arm-linux-gnueabihf-gcc GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"32v7 -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=1 CC=arm-linux-gnueabi-gcc GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"32v7 -trimpath -ldflags "-s -w -buildid=" ./main
     elif [ $GOARCH = "386" ]; then
         echo " "
         echo "###################### $GOARCH ######################"

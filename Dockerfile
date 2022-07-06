@@ -29,9 +29,6 @@ RUN apt-add-repository https://cli.github.com/packages
 RUN apt-get update
 RUN apt-get install gh -yq
 
-## GCC
-RUN apt-get install -yq gcc-mipsel-linux-gnu gcc-mips64-linux-gnuabi64 gcc-mips-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu
-
 ## X-UI Packages
 RUN apt-get install jq wget unzip rclone aria2 git -y -q
 
@@ -51,6 +48,9 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 RUN apt-get update && apt-get install -y locales && locale-gen en_US.UTF-8
+
+## GCC
+RUN apt-get install -yq gcc-mipsel-linux-gnu gcc-mips64-linux-gnuabi64 gcc-mips-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu gcc-arm-linux-gnueabi
 
 # Install repo
 RUN set -x \
