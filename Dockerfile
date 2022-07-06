@@ -65,12 +65,16 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 # Install GoLang
 RUN add-apt-repository ppa:longsleep/golang-backports
 RUN apt-get update
-RUN wget https://storage.googleapis.com/golang/$(curl -s https://go.dev/dl/?mode=json | jq -r '.[0].version').linux-amd64.tar.gz
-RUN tar -xf go*linux-amd64.tar.gz
-RUN chown -R root:root go
-RUN mv -v go /usr/local
-RUN echo "export GOPATH=$HOME/go" >> /root/.bashrc
-RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /root/.bashrc
+RUN apt-get install golang-go -yq
+RUN mkdir -p ~/go/{bin,pkg,src}
+RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
+RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
+# RUN wget https://storage.googleapis.com/golang/$(curl -s https://go.dev/dl/?mode=json | jq -r '.[0].version').linux-amd64.tar.gz
+# RUN tar -xf go*linux-amd64.tar.gz
+# RUN chown -R root:root go
+# RUN mv -v go /usr/local
+# RUN echo "export GOPATH=$HOME/go" >> /root/.bashrc
+# RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /root/.bashrc
 
 # My Script
 RUN wget -O compile-xray-core https://raw.githubusercontent.com/dopaemon/Dockerfile/bionic/compile-xray-core
@@ -114,8 +118,11 @@ RUN git config --global user.name "dopaemon"
 RUN git config --global color.ui false
 
 # GoLang ENV
-RUN echo "export GOPATH=$HOME/go" >> /home/doraemon/.bashrc
-RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /home/doraemon/.bashrc
+# RUN echo "export GOPATH=$HOME/go" >> /home/doraemon/.bashrc
+# RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /home/doraemon/.bashrc
+RUN mkdir -p ~/go/{bin,pkg,src}
+RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
+RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
 
 # Work in the build directory, repo is expected to be init'd here
 WORKDIR /src
