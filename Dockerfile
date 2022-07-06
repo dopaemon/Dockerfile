@@ -13,12 +13,13 @@ ENV CCACHE_DIR /tmp/ccache
 ENV CCACHE_EXEC /usr/bin/ccache 
 ENV USE_CCACHE true
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
+ENV GOVER $(curl -s https://go.dev/dl/?mode=json | jq -r '.[0].version')
 
 # Install dependencies
 RUN apt-get update
 RUN apt-get full-upgrade -y
 RUN apt-get -y install --no-install-recommends apt-utils dialog 2>&1
-RUN apt-get install software-properties-common bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates -y
+RUN apt-get install software-properties-common bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates nano -y
 
 # Install Gh
 RUN /usr/bin/apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv C99B11DEB97541F0
@@ -62,10 +63,12 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 # Install GoLang
 RUN add-apt-repository ppa:longsleep/golang-backports
 RUN apt-get update
-RUN apt-get install golang-go -yq
-RUN mkdir -p ~/go/{bin,pkg,src}
-RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
-RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
+RUN wget https://storage.googleapis.com/golang/$VERSION.linux-amd64.tar.gz
+RUN tar -xf go*linux-amd64.tar.gz
+RUN chown -R root:root go
+RUN mv -v go /usr/local
+RUN echo "export GOPATH=$HOME/go" >> /root/.bashrc
+RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /root/.bashrc
 
 # My Script
 RUN wget -O compile-xray-core https://raw.githubusercontent.com/dopaemon/Dockerfile/bionic/compile-xray-core
@@ -98,9 +101,8 @@ RUN git config --global user.name "dopaemon"
 RUN git config --global color.ui false
 
 # GoLang ENV
-RUN mkdir -p ~/go/{bin,pkg,src}
-RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
-RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
+RUN echo "export GOPATH=$HOME/go" >> /doraemon/.bashrc
+RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /doraemon/.bashrc
 
 # Work in the build directory, repo is expected to be init'd here
 WORKDIR /src
