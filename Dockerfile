@@ -89,9 +89,20 @@ RUN cp -r compile-xray-core /usr/bin/
 RUN cp -r compile-xrayr /usr/bin/
 RUN cp -r compile-xui /usr/bin/
 
+# enable ssh
+RUN echo "PermitRootLogin yes" | sudo tee -a /etc/ssh/sshd_config
+RUN echo "PasswordAuthentication yes" | sudo tee -a /etc/ssh/sshd_config
+RUN service ssh start
+
 # Add User
 # Why? Well for avoid something wrong
 # I've seen some notes for not using root when build
+
+RUN useradd -ms /bin/bash shell
+RUN echo "shell ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+RUN echo "shell:123456"|chpasswd
+
 RUN useradd -ms /bin/bash doraemon
 RUN echo "doraemon ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER doraemon
@@ -103,8 +114,8 @@ RUN git config --global user.name "dopaemon"
 RUN git config --global color.ui false
 
 # GoLang ENV
-RUN echo "export GOPATH=$HOME/go" >> /doraemon/.bashrc
-RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /doraemon/.bashrc
+RUN echo "export GOPATH=$HOME/go" >> /home/doraemon/.bashrc
+RUN echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> /home/doraemon/.bashrc
 
 # Work in the build directory, repo is expected to be init'd here
 WORKDIR /src
