@@ -8,7 +8,7 @@ platforms=(
 "linux/amd64"
 "linux/arm"
 "linux/arm64"
-"linux/m$GOARCHips"
+"linux/mips"
 "linux/mips64"
 "linux/mips64le"
 "linux/mipsle"

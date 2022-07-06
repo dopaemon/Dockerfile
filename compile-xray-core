@@ -30,20 +30,65 @@ do
         echo " "
         echo "###################### arm32v5 ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"32v5 -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=1 CC=arm-linux-gnueabihf- GOOS=$GOOS GOARCH=$GOARCH GOARM=5 go build -o OUT/"$output_name"32v5 -v -trimpath -ldflags "-s -w -buildid=" ./main
         echo " "
         echo "###################### arm32v6 ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"32v6 -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=1 CC=arm-linux-gnueabihf- GOOS=$GOOS GOARCH=$GOARCH GOARM=6 go build -o OUT/"$output_name"32v6 -v -trimpath -ldflags "-s -w -buildid=" ./main
         echo " "
         echo "###################### arm32v7 ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"32v7 -v -trimpath -ldflags "-s -w -buildid=" ./main
-    else
+        env CGO_ENABLED=1 CC=arm-linux-gnueabihf- GOOS=$GOOS GOARCH=$GOARCH GOARM=7 go build -o OUT/"$output_name"32v7 -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "386" ]; then
         echo " "
         echo "###################### $GOARCH ######################"
         echo " "
-        env GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -trimpath -ldflags "-s -w -buildid=" ./main
+        env CGO_ENABLED=1 CC=x86_64-linux-gnu- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "amd64" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=x86_64-linux-gnu- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "arm64" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=aarch64-linux-gnu- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "mips" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=mips-linux-gnu- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "mips64" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=mips64-linux-gnuabi64- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "mips64le" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=mips64-linux-gnuabi64- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "mipsle" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=mipsel-linux-gnu- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "riscv64" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=riscv64-linux-gnu- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    elif [ $GOARCH = "s390x" ]; then
+        echo " "
+        echo "###################### $GOARCH ######################"
+        echo " "
+        env CGO_ENABLED=1 CC=s390x-linux-gnu- GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
+    else
+        echo " "
+        echo "###################### None ######################"
+        echo " "
+        # env CGO_ENABLED=1 GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -trimpath -ldflags "-s -w -buildid=" ./main
     fi
 
     if [ $? -ne 0 ]; then

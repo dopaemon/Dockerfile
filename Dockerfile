@@ -27,10 +27,10 @@ RUN apt-get update
 RUN apt-get install gh -yq
 
 ## GCC
-# RUN apt-get install -yq libgcc1-i386-cross gcc-7-mipsel-linux-gnu
+RUN apt-get install -yq gcc-mipsel-linux-gnu gcc-mips64-linux-gnuabi64 gcc-mips-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu
 
 ## X-UI Packages
-RUN apt-get install jq wget unzip rclone aria2 git gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu -y -q
+RUN apt-get install jq wget unzip rclone aria2 git -y -q
 
 RUN apt-get purge openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre -y
 
