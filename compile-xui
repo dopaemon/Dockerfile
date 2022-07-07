@@ -43,7 +43,7 @@ do
         echo " "
         echo "###################### $GOARCH ######################"
         echo " "
-        env CGO_ENABLED=1 CC=x86_64-linux-gnu-gcc GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
+        env CGO_ENABLED=1 CC=i686-linux-gnu-gcc GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
     elif [ $GOARCH = "amd64" ]; then
         echo " "
         echo "###################### $GOARCH ######################"

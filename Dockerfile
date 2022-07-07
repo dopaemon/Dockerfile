@@ -15,6 +15,7 @@ ENV USE_CCACHE true
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # Install dependencies
+RUN dpkg --add-architecture i386
 RUN apt-get update
 RUN apt-get full-upgrade -y
 RUN apt-get -y install --no-install-recommends apt-utils dialog 2>&1
@@ -49,8 +50,10 @@ ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 RUN apt-get update && apt-get install -y locales && locale-gen en_US.UTF-8
 
+RUN apt-get install -yq linux-libc-dev
+
 ## GCC
-RUN apt-get install -yq gcc-mipsel-linux-gnu gcc-mips64-linux-gnuabi64 gcc-mips-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu gcc-arm-linux-gnueabi
+RUN apt-get install -yq gcc-i686-linux-gnu gcc-mipsel-linux-gnu gcc-mips64-linux-gnuabi64 gcc-mips-linux-gnu gcc-arm-linux-gnueabihf gcc-riscv64-linux-gnu gcc-7-aarch64-linux-gnu gcc-7-s390x-linux-gnu gcc-aarch64-linux-gnu gcc-s390x-linux-gnu gcc-arm-linux-gnueabi
 
 # Install repo
 RUN set -x \
