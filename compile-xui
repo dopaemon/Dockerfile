@@ -64,16 +64,16 @@ do
         echo "###################### $GOARCH ######################"
         echo " "
         env CGO_ENABLED=1 CC=mips64-linux-gnuabi64-gcc GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
-    elif [ $GOARCH = "mips64le" ]; then
-        echo " "
-        echo "###################### $GOARCH ######################"
-        echo " "
-        env CGO_ENABLED=1 CC=mips64-linux-gnuabi64-gcc GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
-    elif [ $GOARCH = "mipsle" ]; then
-        echo " "
-        echo "###################### $GOARCH ######################"
-        echo " "
-        env CGO_ENABLED=1 CC=mipsel-linux-gnu-gcc GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
+    # elif [ $GOARCH = "mips64le" ]; then
+    #     echo " "
+    #     echo "###################### $GOARCH ######################"
+    #     echo " "
+    #     env CGO_ENABLED=1 CC=mips64-linux-gnuabi64-gcc GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-mfloat-abi=hard -extldflags=-static' -tags sqlite_omit_load_extension main.go
+    # elif [ $GOARCH = "mipsle" ]; then
+    #     echo " "
+    #     echo "###################### $GOARCH ######################"
+    #     echo " "
+    #     env CGO_ENABLED=1 CC=mipsel-linux-gnu-gcc GOOS=$GOOS GOARCH=$GOARCH go build -o OUT/$output_name -v -ldflags='-extldflags=-static' -tags sqlite_omit_load_extension main.go
     elif [ $GOARCH = "riscv64" ]; then
         echo " "
         echo "###################### $GOARCH ######################"
