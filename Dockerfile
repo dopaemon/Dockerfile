@@ -31,7 +31,7 @@ RUN apt-get update
 RUN apt-get install gh -yq
 
 ## X-UI Packages
-RUN apt-get install jq wget unzip rclone aria2 git -y -q
+RUN apt-get install jq wget unzip aria2 git -y -q
 
 RUN apt-get purge openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre -y
 
@@ -126,9 +126,6 @@ RUN git config --global color.ui false
 RUN mkdir -p ~/go/{bin,pkg,src}
 RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
 RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
-
-# Make Symlink rclone
-RUN sudo ln -s /usr/bin/rclone /usr/bin/clone
 
 # Work in the build directory, repo is expected to be init'd here
 WORKDIR /src
