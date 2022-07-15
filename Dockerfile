@@ -127,6 +127,9 @@ RUN mkdir -p ~/go/{bin,pkg,src}
 RUN echo 'export GOPATH="$HOME/go"' >> ~/.bashrc
 RUN echo 'export PATH="$PATH:${GOPATH//://bin:}/bin"' >> ~/.bashrc
 
+# Make Symlink rclone
+RUN sudo ln -s /usr/bin/rclone /usr/bin/clone
+
 # Work in the build directory, repo is expected to be init'd here
 WORKDIR /src
 
