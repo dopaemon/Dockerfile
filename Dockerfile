@@ -59,7 +59,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
-RUN apt-get install gcc-4.9 -yq
+RUN apt-get install gcc-11 -yq
 RUN apt-get upgrade libstdc++6 -yq
 
 # Install GoLang
