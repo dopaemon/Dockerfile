@@ -1,10 +1,10 @@
-# Import Ubuntu 18.04 Image
-FROM ubuntu:18.04
+# Import Ubuntu 20.04 Image
+FROM ubuntu:20.04
 
 # ENV
 ENV DEBIAN_FRONTEND noninteractive
 ENV USER Dopaemon
-ENV HOSTNAME KernelPanic-OpenSource
+ENV HOSTNAME dopaemon
 ENV USE_CCACHE 1
 ENV LC_ALL C
 ENV CCACHE_COMPRESS 1
@@ -14,12 +14,10 @@ ENV CCACHE_EXEC /usr/bin/ccache
 ENV USE_CCACHE true
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
-# Install dependencies
-RUN dpkg --add-architecture i386
+# Install packages
 RUN apt-get update
-RUN apt-get full-upgrade -y
-RUN apt-get -y install --no-install-recommends apt-utils dialog 2>&1
-RUN apt-get install software-properties-common bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates nano -y
+RUN apt-get install -yq libpam-pwquality
+RUN apt-get install -yq cpio bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libncurses5 libsdl1.2-dev libssl-dev libwxgtk3.0-gtk3-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev openjdk-8-jdk python-is-python3
 
 # Install ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list && apt update && apt install ngrok -yq
@@ -30,18 +28,12 @@ RUN apt-add-repository https://cli.github.com/packages
 RUN apt-get update
 RUN apt-get install gh -yq
 
-## X-UI Packages
 RUN apt-get install jq wget unzip aria2 git -y -q
 
 RUN apt-get purge openjdk-8-jdk openjdk-8-jre openjdk-11-jdk openjdk-11-jre -y
 
 RUN apt-get install openjdk-8-jdk openjdk-8-jre -y
 
-RUN set -x \
-    && apt-get -yqq update \
-    && apt-get install --no-install-recommends -yqq \
-        adb autoconf automake axel bc bison build-essential ccache clang cmake curl expat flex g++ g++-multilib gawk gcc gcc-multilib git git-core git-lfs gnupg gperf htop imagemagick kmod lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcap-dev libexpat1-dev libgmp-dev liblz4-* liblz4-tool liblzma* libmpc-dev libmpfr-dev libncurses5-dev libsdl1.2-dev libssl-dev libtinfo5 libtool libwxgtk3.0-dev libxml-simple-perl libxml2 libxml2-utils lzip lzma* lzop maven ncftp ncurses-dev patch patchelf pkg-config pngcrush pngquant python python-all-dev re2c rsync schedtool squashfs-tools subversion sudo texinfo unzip w3m xsltproc zip zlib1g-dev zram-config && \
-    apt-get clean
 
 RUN apt-get update && apt-get install -y locales
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
