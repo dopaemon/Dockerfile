@@ -6,7 +6,7 @@ docker_builder:
      DOCKERNAME: "focal"
      DOCKERTAG: "latest"
      GITHUB: "https://github.com/dopaemon/Dockerfile.git"
-   only_if: $CIRRUS_REPO_OWNER == 'dopaemon' && $CIRRUS_BRANCH == 'bionic'
+   only_if: $CIRRUS_REPO_OWNER == 'dopaemon' && $CIRRUS_BRANCH == 'focal'
    skip: $CIRRUS_BRANCH != 'bionic'
    Docker_script:
      - git clone -b $DOCKERNAME --single-branch $GITHUB Dockerfile && cd Dockerfile
