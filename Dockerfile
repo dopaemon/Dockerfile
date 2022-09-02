@@ -88,11 +88,6 @@ RUN cp -r compile-xray-core /usr/bin/
 RUN cp -r compile-xrayr /usr/bin/
 RUN cp -r compile-xui /usr/bin/
 
-# enable ssh
-RUN echo "PermitRootLogin yes" | sudo tee -a /etc/ssh/sshd_config
-RUN echo "PasswordAuthentication yes" | sudo tee -a /etc/ssh/sshd_config
-RUN service ssh start
-
 # Add User
 # Why? Well for avoid something wrong
 # I've seen some notes for not using root when build
