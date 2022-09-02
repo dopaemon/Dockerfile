@@ -57,6 +57,11 @@ RUN rm -rf /var/lib/apt/lists/*
 # Link Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get update
+RUN apt-get install gcc-4.9 -yq
+RUN apt-get upgrade libstdc++6 -yq
+
 # Install GoLang
 # RUN add-apt-repository ppa:longsleep/golang-backports
 # RUN apt-get update
