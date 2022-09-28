@@ -25,10 +25,12 @@ RUN apt-get install software-properties-common bison repo libssl-dev build-essen
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list && apt update && apt install ngrok -yq
 
 # Install Gh
-RUN /usr/bin/apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv C99B11DEB97541F0
-RUN apt-add-repository https://cli.github.com/packages
-RUN apt-get update
-RUN apt-get install gh -yq
+# RUN /usr/bin/apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv C99B11DEB97541F0
+# RUN apt-add-repository https://cli.github.com/packages
+# RUN apt-get update
+# RUN apt-get install gh -yq
+RUN wget -o gh.deb https://github.com/cli/cli/releases/download/v2.16.1/gh_2.16.1_linux_amd64.deb
+RUN dpkg -i gh.deb
 
 ## X-UI Packages
 RUN apt-get install jq wget unzip aria2 git -y -q
