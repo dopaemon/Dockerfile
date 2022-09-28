@@ -3,11 +3,11 @@ docker_builder:
      USERNAME: "ENCRYPTED[d823085944055ee84567d62a8d862f7504756dabd3499c593c627c838f47facc1eb28c727526db345af0d7ffefa2c05c]"
      EMAIL: "ENCRYPTED[b3966e22ace86a4355774c4a2037802f798adc5312150e14c6aa67cf42313f3c50337f4a1282c3a7568e8a2853183eb6]"
      PASSWORD: "ENCRYPTED[a14f3604d5663366daeb985ed85f0622a565ecbc6f9682266484c080f0875a89964a20d81203d59ea97c30559b6bbf42]"
-     DOCKERNAME: "bionic"
+     DOCKERNAME: "x-ui-builder"
      DOCKERTAG: "latest"
      GITHUB: "https://github.com/dopaemon/Dockerfile.git"
-   only_if: $CIRRUS_REPO_OWNER == 'dopaemon' && $CIRRUS_BRANCH == 'bionic'
-   skip: $CIRRUS_BRANCH != 'bionic'
+   only_if: $CIRRUS_REPO_OWNER == 'dopaemon' && $CIRRUS_BRANCH == 'x-ui-builder'
+   skip: $CIRRUS_BRANCH != 'x-ui-builder'
    Docker_script:
      - git clone -b $DOCKERNAME --single-branch $GITHUB Dockerfile && cd Dockerfile
      - docker login -u $USERNAME -p $PASSWORD
