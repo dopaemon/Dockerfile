@@ -19,7 +19,7 @@ RUN dpkg --add-architecture i386
 RUN apt-get update
 RUN apt-get full-upgrade -y
 RUN apt-get -y install --no-install-recommends apt-utils dialog 2>&1
-RUN apt-get install software-properties-common bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates nano -y
+RUN apt-get install aria2 software-properties-common bison repo libssl-dev build-essential curl flex git gnupg gperf liblz4-tool libncurses5-dev libsdl1.2-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev build-essential kernel-package libncurses5-dev bzip2 git python sudo gcc g++ openssh-server tar gzip ca-certificates nano -y
 
 # Install ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list && apt update && apt install ngrok -yq
@@ -29,8 +29,8 @@ RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/truste
 # RUN apt-add-repository https://cli.github.com/packages
 # RUN apt-get update
 # RUN apt-get install gh -yq
-RUN wget -o gh.deb https://github.com/cli/cli/releases/download/v2.16.1/gh_2.16.1_linux_amd64.deb
-RUN dpkg -i gh.deb
+RUN aria2c https://github.com/cli/cli/releases/download/v2.16.1/gh_2.16.1_linux_amd64.deb
+RUN dpkg -i gh_2.16.1_linux_amd64.deb
 
 ## X-UI Packages
 RUN apt-get install jq wget unzip aria2 git -y -q
