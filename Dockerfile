@@ -9,7 +9,7 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # Install packages
 RUN apt-get update
-RUN apt-get install -yyq build-essential bison flex gnupg libncurses-dev libelf-dev libssl-dev wget sudo curl
+RUN apt-get install -yyq build-essential bison flex gnupg libncurses-dev libelf-dev libssl-dev wget sudo curl git
 
 RUN apt-get update && apt-get install -y locales
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
