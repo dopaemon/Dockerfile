@@ -5,7 +5,6 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV USER=dora
 ENV HOSTNAME=localhost
-ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # Install packages
 RUN apt-get update
