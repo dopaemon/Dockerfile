@@ -19,7 +19,7 @@ libghc-bzlib-dev dpkg-dev make
 optipng maven pwgen libswitch-perl
 policycoreutils minicom libxml-sax-base-perl
 libxml-simple-perl libc6-dev-i386 libx11-dev
-lib32z-dev libgl1-mesa-dev unzip
+lib32z-dev libgl1-mesa-dev unzip nano
 device-tree-compiler rename dwarves
 openjdk-8-jdk bc bison g++-multilib
 gcc-multilib gnupg gperf imagemagick
