@@ -2,9 +2,9 @@
 FROM ubuntu:22.04
 
 # ENV
-ENV DEBIAN_FRONTEND noninteractive
-ENV USER dora
-ENV HOSTNAME localhost
+ENV DEBIAN_FRONTEND=noninteractive
+ENV USER=dora
+ENV HOSTNAME=localhost
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # Install packages
@@ -33,7 +33,7 @@ RUN apt-get install -yyq \
 RUN apt-get update && apt-get install -y locales
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     locale-gen
-ENV LC_ALL en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 RUN apt-get update && apt-get install -y locales && locale-gen en_US.UTF-8
 
@@ -59,6 +59,10 @@ USER dora
 WORKDIR /home/dora
 
 # Git configs
-RUN git config --global color.ui false
+RUN git config --global color.ui true
+RUN git config --global credential.helper store
+RUN git config --global user.name "development"
+RUN git config --global user.email "development@example.com"
+RUN git config --global core.editor "nano -w"
 
 ENTRYPOINT ["/bin/bash"]
