@@ -46,6 +46,7 @@ RUN set -x \
 RUN ln -sf /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 
 # Clean APT
+RUN apt-get autoremove -y
 RUN rm -rf /var/lib/apt/lists/*
 
 # Setup User
