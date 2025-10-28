@@ -29,6 +29,10 @@ RUN apt-get install -yyq \
     lzop pngcrush rsync schedtool squashfs-tools \
     xsltproc zlib1g-dev python3 python-is-python3
 
+# Add My PPA
+RUN curl -fsSL https://dopaemon.github.io/PPA/KEY.gpg | gpg --dearmor -o /usr/share/keyrings/dopaemon.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/dopaemon.gpg] https://dopaemon.github.io/PPA ./" | tee /etc/apt/sources.list.d/dopaemon.list
+
 RUN apt-get update && apt-get install -y locales
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     locale-gen
